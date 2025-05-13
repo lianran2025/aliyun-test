@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>当前时间与农历</title>
+  <!-- 引入农历库 lunar-javascript CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/lunar-javascript@1.6.0/lunar.min.js"></script>
+  <style>
+    body {
+      font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+      background: #f7f7f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    .time {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .lunar {
+      font-size: 1.2rem;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="time" id="time"></div>
+    <div class="lunar" id="lunar"></div>
+  </div>
+  <script>
+    function pad(n) {
+      return n < 10 ? '0' + n : n;
+    }
+    function updateTime() {
+      const now = new Date();
+      // 公历时间
+      const year = now.getFullYear();
+      const month = pad(now.getMonth() + 1);
+      const date = pad(now.getDate());
+      const hour = pad(now.getHours());
+      const minute = pad(now.getMinutes());
+      const second = pad(now.getSeconds());
+      document.getElementById('time').textContent = `${year}年${month}月${date}日 ${hour}:${minute}:${second}`;
+      // 农历时间
+      const lunar = Lunar.fromDate(now);
+      document.getElementById('lunar').textContent = `农历：${lunar.getYearInChinese()}年${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}`;
+    }
+    updateTime();
+    setInterval(updateTime, 1000);
+  </script>
+</body>
+</html>
