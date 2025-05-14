@@ -8,6 +8,6 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY index.html /usr/share/nginx/html/
 
 # 暴露 80 端口
-EXPOSE 80
+EXPOSE 8888
 
 # 使用 nginx 官方默认启动命令
